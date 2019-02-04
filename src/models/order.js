@@ -1,13 +1,18 @@
 const mongoose = require("mongoose");
+const idValidator = require('mongoose-id-validator');
 const { Schema } = mongoose;
 
-const clientSchema = require('./client').schema;
-
 const orderSchema = new Schema({
-    client: clientSchema,
     address: String,
-    date: String,
-    time: String
+    date: {
+        type: Date
+    },
+    client: {
+        type: Schema.Types.ObjectId,
+        ref: 'Client'
+    }
 });
+
+orderSchema.plugin(idValidator, { message: 'Debe ser un id valido' });
 
 module.exports = mongoose.model('Order', orderSchema);
