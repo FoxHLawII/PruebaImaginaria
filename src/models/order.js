@@ -3,9 +3,13 @@ const idValidator = require('mongoose-id-validator');
 const { Schema } = mongoose;
 
 const orderSchema = new Schema({
-    address: String,
+    address: {
+        type: String,
+        required: [true, 'Dato requerido']
+    },
     date: {
-        type: Date
+        type: Date,
+        required: [true, 'Dato requerido']
     },
     client: {
         type: Schema.Types.ObjectId,

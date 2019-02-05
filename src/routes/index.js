@@ -1,2 +1,4 @@
-module.exports = require('./driver.routes');
-module.exports = require('./client.routes');
+module.exports = {
+    clientRoutes: require('./client.routes'),
+    driverRoutes: require('./driver.routes')
+}

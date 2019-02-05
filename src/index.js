@@ -15,7 +15,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Routes
-app.use(routes);
+routes.clientRoutes(app);
+routes.driverRoutes(app);
 
 // DB
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true }, (err) => err ? console.log(err) : console.log('DB online'));

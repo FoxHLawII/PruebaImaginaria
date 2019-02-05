@@ -1,8 +1,11 @@
-const router = require('express').Router();
-const ENV = process.env;
+const DriverService = require('../services/driver.service');
 
-router.get('/orders/:date', (req, res) => {
-    console.log(req.params.date);
-});
-
-module.exports = router;
+module.exports = (app) => {
+    app.get('/drivers/:idDriver/:date', async(req, res) => {
+        const { idDriver, date } = req.params;
+        const orders = await new DriverService().getOrdersByIdAndDate(idDriver, date);
+        orders.length === 0 ?
+            res.json({ status: "ok", message: "No tiene ninguna orden para hoy" }) :
+            res.json({ status: "ok", data: orders });
+    });
+}
